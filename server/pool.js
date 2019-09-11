@@ -7,3 +7,4 @@ var pool = mysql.createPool({
   connectionLimit:20,
   database:"ms"
 })
+module.exports = pool;
