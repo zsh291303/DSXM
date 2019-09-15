@@ -9,7 +9,7 @@ CREATE TABLE ms_food_time(
   title VARCHAR(32)
 );
 #插入
-INSERT TABLE ms_food_time VALUES
+INSERT INTO ms_food_time VALUES
 ("NULL","早餐时间"),
 ("NULL","午餐时间"),
 ("NULL","下午茶时间"),
@@ -20,12 +20,12 @@ CREATE TABLE ms_big_carousel_item(
   bcid INT PRIMARY KEY AUTO_INCREMENT,
   pic VARCHAR(128),
   url VARCHAR(128),
-  title VARCHAR(32)，
-  title1 VARCHAR(64)，
+  title VARCHAR(32),
+  title1 VARCHAR(64),
   ftid INT
 );
 #插入
-INSERT TABLE ms_big_carousel_item VALUES
+INSERT INTO ms_big_carousel_item VALUES
 ("NULL","img1","url","全汤面胡萝卜素包子","美味可口，营养丰富","1"),
 ("NULL","img2","url","田园三明治","美味营养，吃完元气慢慢","1"),
 ("NULL","img3","url","鲜虾小肉饼","简单美味，几分钟搞定早餐","1"),
@@ -42,10 +42,10 @@ INSERT TABLE ms_big_carousel_item VALUES
 #图片
 CREATE TABLE ms_index_pic_title(
   tid INT PRIMARY KEY AUTO_INCREMENT,
-  title VARCHAR(64),
+  title VARCHAR(64)
 );
 #插入
-INSERT TABLE ms_index_pic_title VALUES
+INSERT INTO ms_index_pic_title VALUES
 ("NULL","水果"),
 ("NULL","蔬菜"),
 ("NULL","五谷"),
@@ -56,10 +56,10 @@ CREATE TABLE ms_index_food(
   fid INT PRIMARY KEY AUTO_INCREMENT,
   fname VARCHAR(32),
   url VARCHAR(64),
-  tid INT,
+  tid INT
 );
 #插入
-INSERT TABLE ms_index_food VALUES
+INSERT INTO ms_index_food VALUES
 ("NULL","梨","url","1"),
 ("NULL","香蕉","url","1"),
 ("NULL","苹果","url","1"),
@@ -99,7 +99,7 @@ CREATE TABLE ms_small_carousel_bar(
   name VARCHAR(16)
 );
 #插入
-INSERT TABLE ms_small_carousel_bar VALUES
+INSERT INTO ms_small_carousel_bar VALUES
 ("NULL","最新"),
 ("NULL","一小时"),
 ("NULL","今日"),
@@ -116,7 +116,7 @@ CREATE TABLE ms_small_carousel_item(
   scid INT
 );
 #插入
-INSERT TABLE ms_small_carousel_item VALUES
+INSERT INTO ms_small_carousel_item VALUES
 ("NULL","","木须肉","冬儿妈妈","8步/大概10分钟","炒/香辣味","1"),
 ("NULL","","飞酥饼","行小鸭","5步/大概30分钟","烤/家常味","1"),
 ("NULL","","南瓜十谷米粥","豆妈","步/大概分钟","煮/家常味","1"),
@@ -132,4 +132,4 @@ INSERT TABLE ms_small_carousel_item VALUES
 ("NULL","","黄金咖喱虾饭团","爱生活的馋猫","10步/大概15分钟","炸/家常味","4"),
 ("NULL","","墨鱼丸子冬瓜木耳煲","踏月色而来","14步/大概30分钟","炖/咸鲜味","4"),
 ("NULL","","干煸烤肠茄条","踏月色而来","15步/大概30分钟","干煸/家常味","4"),
-("NULL","","海虾芸豆木耳时蔬便当","踏月色而来","14步/大概15分钟","炒/咸鲜味","4"),
+("NULL","","海虾芸豆木耳时蔬便当","踏月色而来","14步/大概15分钟","炒/咸鲜味","4");
