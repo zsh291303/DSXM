@@ -1,13 +1,13 @@
 const express = require("express");
 const session = require("express-session")
 const cors = require("cors")
-const index = require("./routes/index")
+const index = require("./routes/index.js")
 
 var app = express();
 app.listen(8080)
 
 app.use(cors({
-  origin:["http://127.0.0.1:5500","http://localhost:8080"],
+  origin:["http://172.17.10.238:8081","http://localhost:8081"],
   credentials:true
 }))
 
@@ -19,4 +19,4 @@ app.use(session({
 
 app.use(express.static("public"))
 
-app.use("/index",index);
+app.use("/",index);
