@@ -4,10 +4,10 @@ const cors = require("cors")
 const index = require("./routes/index.js")
 
 var app = express();
-app.listen(8080)
+app.listen(5500)
 
 app.use(cors({
-  origin:["http://172.17.10.238:8081","http://localhost:8081"],
+  origin:["http://172.17.10.238:8080","http://localhost:8080"],
   credentials:true
 }))
 
