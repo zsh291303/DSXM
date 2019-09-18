@@ -17,18 +17,18 @@
             </a>
           </div>
         </div>
-        <!-- 箭头 -->
-        <a href="javascript:;" @click="move(1)" class="carousel-control-next">
-          <span class="carousel-control-next-icon"></span>
-        </a>
-        <a href="javascript:;" @click="move(-1)" class="carousel-control-prev">
-          <span class="carousel-control-prev-icon"></span>
-        </a>
-        <!--3.轮播指示符-->
-        <ul class="carousel-indicators">
-          <li v-for="(img,idx) of listf" :key="idx" :class="idx==i?'active':''" @click="moveTo(idx)"></li>
-        </ul>
       </div>
+      <!-- 箭头 -->
+      <a href="javascript:;" @click="move(1)" class="carousel-control-next">
+        <span class="carousel-control-next-icon"></span>
+      </a>
+      <a href="javascript:;" @click="move(-1)" class="carousel-control-prev">
+        <span class="carousel-control-prev-icon"></span>
+      </a>
+      <!--3.轮播指示符-->
+      <ul class="carousel-indicators">
+        <li v-for="(img,idx) of listf" :key="idx" :class="idx==i?'active':''" @click="moveTo(idx)"></li>
+      </ul>
     </div>
   </div>
 </div>
