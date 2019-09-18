@@ -1,22 +1,9 @@
 <template>
-  <div id="index" class="container">
+  <div id="index" class="container p-0">
 
     <h2>首页</h2>
     <!-- 小轮播 -->
-    <div id="sm-carouerl" class="top">
-      <div class="carousel" :style="{width:innerWidth+'px'}">
-        <div class="carousel-inner">
-          <div v-for="(itemf,i) of listf" :key="i" class="carousel-item" :style="{width:innerWidth+'px'}">
-            <div v-for="(item,j) of itemf" :key="j" :style="{width:innerWidth+'px'}">
-              <a href="javascript:;">
-                <img :src="item.url" alt="">
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
+    <smcarouerl></smcarouerl>
     <!-- 中间图 -->
     <div id="index-food" class="middle"></div>
     <!-- 大轮播 -->
@@ -25,34 +12,19 @@
   </div>
 </template>
 <script>
+import smCarouerl from "../components/index/smCarouerl.vue"
 export default {
+  components:{
+    "smcarouerl":smCarouerl
+  },
   data(){
     return {
-      i:0,
-      innerWidth:window.innerWidth,
-      listf:[],
       lists:[],
       pc:"",
-      listp:[]
+      listp:[],
     }
   },
   methods:{
-    loadf(){
-      this.axios.get(
-        "/indexfc"
-      ).then(result=>{
-        console.log(result)
-      })
-      this.axios.get(
-        "/indexf"
-      ).then(result=>{
-        console.log(result)
-        for(var i=0;i<result.data.length;i+=3){
-          this.listf.push(result.data.slice(i,i+3))
-        }
-        console.log(this.listf,1)
-      })
-    },
     loadp(){
       this.axios.get(
         "/indexpc"
@@ -83,17 +55,13 @@ export default {
     }
   },
   created(){
-    this.loadf();
+   
     this.loadp();
     this.loads();
-    window.addEventListener("resize",()=>{
-      this.innerWidth = window.innerWidth
-    })
+
   },
   computed:{
-    ulStyle(){
-      var width = this.innerWidth*(this)
-    }
+    
   }
 }
 </script>
