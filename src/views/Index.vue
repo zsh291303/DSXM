@@ -5,17 +5,21 @@
     <!-- 小轮播 -->
     <smcarouerl></smcarouerl>
     <!-- 中间图 -->
-    <div id="index-food" class="middle"></div>
+    <middle></middle>
     <!-- 大轮播 -->
-    <div id="bg-carousel" class="foot"></div>
+    <bgcarouerl></bgcarouerl>
 
   </div>
 </template>
 <script>
 import smCarouerl from "../components/index/smCarouerl.vue"
+import middle from "../components/index/middle.vue"
+import bgCarouerl from "../components/index/bgCarouerl.vue"
 export default {
   components:{
-    "smcarouerl":smCarouerl
+    "smcarouerl":smCarouerl,
+    "middle":middle,
+    "bgcarouerl":bgCarouerl
   },
   data(){
     return {
@@ -29,28 +33,28 @@ export default {
       this.axios.get(
         "/indexpc"
       ).then(result=>{
-        console.log(result)
+        //console.log(result)
       })
       this.axios.get(
         "/indexp"
       ).then(result=>{
-        console.log(result)
+        //console.log(result)
       })
     },
     loads(){
       this.axios.get(
         "/indexsc"
       ).then(result=>{
-        console.log(result)
+        //console.log(result)
       })
       this.axios.get(
         "/indexs"
       ).then(result=>{
-        console.log(result)
+        //console.log(result)
         for(var i=0;i<result.data.length;i+=4){
           this.lists.push(result.data.slice(i,i+4))
         }
-        console.log(this.lists,2)
+        //console.log(this.lists,2)
       })
     }
   },

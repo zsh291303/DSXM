@@ -1,13 +1,22 @@
 <template>
 <div>
   <div id="sm-carouerl" class="top">
-    <div class="carousel" :style="{width:innerWidth+'px'}">
+    <div class="carousel" :style="{width:innerWidth+'px'}" @mouseenter="stop" @mouseleave="start">
       <div class="carousel-inner" :class="ulClass" :style="ulStyle">
         <div v-for="(itemf,i) of listf" :key="i" class="carousel-item" :style="{width:innerWidth+'px'}">
           <div v-for="(item,j) of itemf" :key="j">
             <a href="javascript:;">
               <img :src="item.url" alt="">
             </a>
+            <div>
+              <table></table>
+              <a href="javascript:;">
+                <h2  class="my-3 ml-3">{{item.title}}</h2>
+              </a>
+              <a href="javascript:;">
+                <p class="ml-3">{{item.title1}}</p>
+              </a>
+            </div>
           </div>
         </div>
         <div class="carousel-item" :style="{width:innerWidth+'px'}">
@@ -42,31 +51,87 @@ export default {
       ulClass:{ hasTrans:true },
       canClick:true,
       listf:[],
+      timer:null
     }
   },
   methods:{
+    moveTo(i){
+      if(this.canClick){
+        this.i = i
+        this.canClick = false
+        setTimeout(() => {
+          this.canClick = true
+        },300)
+      }
+    },
+    move(i){
+      if(this.canClick){
+        this.canClick = false;
+        if(i == -1 && this.i == 0){
+          this.ulClass.hasTrans = false;
+          setTimeout(() => {
+            this.i = this.listf.length;
+            setTimeout(() => {
+              this.ulClass.hasTrans = true
+              this.i += i
+              setTimeout(() => {
+                this.canClick = true
+              },200)
+            },50)
+          },50)
+        }else if(i == 1 && this.i == this.listf.length-1){
+          this.i += i
+          setTimeout(() => {
+            this.ulClass.hasTrans = false
+            setTimeout(() => {
+              this.i = 0
+              setTimeout(() => {
+                this.ulClass.hasTrans = true
+                setTimeout(() => {
+                  this.canClick = true
+                })
+              },50)
+            },50)
+          },200) 
+        }else{
+          this.i += i
+          setTimeout(() => {
+            this.canClick = true 
+          },300)
+        }
+      }
+    },
+    stop(){
+      clearInterval(this.timer)
+    },
+    start(){
+      this.timer = setInterval(() => {
+        this.move(1)
+      },3000)
+    },
     loadf(){
       this.axios.get(
         "/indexfc"
       ).then(result=>{
-        console.log(result)
+        //console.log(result)
       })
       this.axios.get(
         "/indexf"
       ).then(result=>{
-        console.log(result)
+        // console.log(result)
         for(var i=0;i<result.data.length;i+=3){
           this.listf.push(result.data.slice(i,i+3))
         }
-        console.log(this.listf,1)
+        // console.log(this.listf)
       })
     },
   },
   created(){
     this.loadf();
-     window.addEventListener("resize",()=>{
+    window.addEventListener("resize",()=>{
       this.innerWidth = 1140
     })
+    this.start();
   },
   computed: {
     ulStyle(){
@@ -81,6 +146,10 @@ export default {
   #sm-carouerl>.carousel{
     margin-top:60px;
     overflow:hidden;
+    border-radius: 5px
+  }
+  #sm-carouerl div:last-child{
+    position: relative;
   }
   #sm-carouerl>.carousel:after{
     content:"";
@@ -88,7 +157,7 @@ export default {
     clear:both;
   }
    #sm-carouerl>.carousel>.carousel-inner.hasTrans{
-     transition:all .2s linear;
+     transition:all .5s linear;
    }
   #sm-carouerl>.carousel>.carousel-inner>.carousel-item{
     display:block;
@@ -107,11 +176,28 @@ export default {
   }
   #sm-carouerl>.carousel>.carousel-inner>.carousel-item>div{
     width:calc(100%/3);
+    position: relative;
+  }  
+  #sm-carouerl>.carousel>.carousel-inner>.carousel-item>div>div{
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 30%;
+    background-color: rgba(204, 204, 204, .5)
+  }
+  #sm-carouerl>.carousel>.carousel-inner>.carousel-item>div>div>a{
+    color: #060606;
+    text-align: left;
+  }
+  #sm-carouerl>.carousel>.carousel-inner>.carousel-item>div>div>a:hover{
+    text-decoration-line: none;
+    color:#fee
   }
   #sm-carouerl>.carousel>.carousel-inner>.carousel-item>div img{
     width:100%;
   }
-  #sm-carouerl>.carousel>.carousel-inner>.carousel-item:nth-child(2)>a:last-child{
+  /* #sm-carouerl>.carousel>.carousel-inner>.carousel-item:nth-child(2)>a:last-child{
     background-color:#fa9c77;
   }
   #sm-carouerl>.carousel>.carousel-inner>.carousel-item:nth-child(3)>a:last-child{
@@ -131,13 +217,13 @@ export default {
   }
   #sm-carouerl>.carousel>.carousel-inner>.carousel-item:nth-child(8)>a:last-child{
     background-color:#2f49079b;
-  }
+  } */
 
   /*重写指示符的样式*/
-  .carousel-indicators{
-    bottom:130px;
+  #sm-carouerl .carousel-indicators{
+    bottom:50px;
   }
-  .carousel-indicators li{
+  #sm-carouerl .carousel-indicators li{
     width:15px;height:15px;
     background-color:#fff;
     margin-left:6px;
@@ -145,43 +231,43 @@ export default {
     border-radius: 50%;
     top:60px;
   }
-  .carousel-indicators>li:hover, .carousel-indicators>li.active{
+  #sm-carouerl .carousel-indicators>li:hover, .carousel-indicators>li.active{
     transform:scale(1.3)
   }
-  .carousel-indicators>li:first-child{
+  #sm-carouerl .carousel-indicators>li:first-child{
     background-color:#f68cc6;
   }
-  .carousel-indicators>li:nth-child(2){
+  #sm-carouerl .carousel-indicators>li:nth-child(2){
     background-color:#fa9c77;
   }
-  .carousel-indicators>li:nth-child(3){
+  #sm-carouerl .carousel-indicators>li:nth-child(3){
     background-color:#ba4b5d;
   }
-  .carousel-indicators>li:nth-child(4){
+  #sm-carouerl .carousel-indicators>li:nth-child(4){
     background-color:#02c0f0f5;
   }
-  .carousel-indicators>li:nth-child(5){
+  #sm-carouerl .carousel-indicators>li:nth-child(5){
     background-color:#bc76dd;
   }
-  .carousel-indicators>li:nth-child(6){
+  #sm-carouerl .carousel-indicators>li:nth-child(6){
     background-color:#539788;
   }
-  .carousel-indicators>li:nth-child(7){
+  #sm-carouerl .carousel-indicators>li:nth-child(7){
     background-color:#c67ee79b;
   }
-  .carousel-indicators>li:nth-child(8){
+  #sm-carouerl .carousel-indicators>li:nth-child(8){
     background-color:#2f49079b;
-  }
+  } 
   /*重写左右箭头的样式*/
-  .carousel-control-prev,
-  .carousel-control-next{
+  #sm-carouerl .carousel-control-prev,
+  #sm-carouerl .carousel-control-next{
     width:40px;height:100px;
     background-color:rgba(95, 95, 92, 0.3);
     top:35%;
     margin-left:40px;
     border-radius:0.25rem;
   }
-  .carousel-control-next{
+  #sm-carouerl .carousel-control-next{
     margin-right:40px;
   }
 </style>

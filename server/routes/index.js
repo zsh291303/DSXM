@@ -24,8 +24,9 @@ router.get("/indexpc",(req,res)=>{
   })
 })
 router.get("/indexp",(req,res)=>{
-  var sql = "select * from ms_index_food"
-  pool.query(sql,[],(err,result)=>{
+  var id = req.query.tid
+  var sql = "select * from ms_index_food where tid = ?"
+  pool.query(sql,[id],(err,result)=>{
     if(err) throw err
     res.send(result)
   })
