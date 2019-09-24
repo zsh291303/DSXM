@@ -2,6 +2,8 @@ const express = require("express");
 const session = require("express-session")
 const cors = require("cors")
 const index = require("./routes/index.js")
+const login = require("./routes/login.js")
+const food = require("./routes/food.js")
 
 var app = express();
 app.listen(5050)
@@ -20,3 +22,5 @@ app.use(session({
 app.use(express.static("public"))
 
 app.use("/",index);
+app.use("/user",login)
+app.use("/food",food)

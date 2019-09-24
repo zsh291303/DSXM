@@ -21,8 +21,8 @@
             <div v-for="(item,j) of items" :key="j" class="flex">
               <a href="javascript:;">
                 <img :src="item.url" alt="">
-                <table></table>
                 <div class="zero">
+                  <table></table>
                   <div class="first">
                     <p>{{item.title}}</p>
                     <p>{{item.pople}}</p>
@@ -238,13 +238,17 @@ export default {
   }
   #bg-carouerl>.carousel>.carousel-inner>.carousel-item>.flex .zero>.first{
     background-color: #fff;
-    transition: all .5s linear;
+    transition: all .5s linear; 
   }
   #bg-carouerl>.carousel>.carousel-inner>.carousel-item>.flex .zero>.first:hover{
     margin-top : -94px;
   }
   #bg-carouerl>.carousel>.carousel-inner>.carousel-item>.flex .zero>.scoend{
-    background-color: #ccc
+    background-color: #ccc;
+    transition: all .5s linear; 
+  }
+  #bg-carouerl>.carousel>.carousel-inner>.carousel-item>.flex .zero>.scoend:hover{
+    margin-top: -94px;
   }
   #bg-carouerl>.carousel>.carousel-inner>.carousel-item>.flex .zero>.first>p:first-child,
   #bg-carouerl>.carousel>.carousel-inner>.carousel-item>.flex .zero>.scoend>p:first-child{

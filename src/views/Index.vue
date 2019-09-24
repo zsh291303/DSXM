@@ -1,14 +1,13 @@
 <template>
   <div id="index" class="container p-0">
-
-    <h2>首页</h2>
+    <my-header></my-header>
     <!-- 小轮播 -->
     <smcarouerl></smcarouerl>
     <!-- 中间图 -->
     <middle></middle>
     <!-- 大轮播 -->
     <bgcarouerl></bgcarouerl>
-
+    <my-footer></my-footer>
   </div>
 </template>
 <script>

@@ -122,7 +122,7 @@ export default {
         for(var i=0;i<result.data.length;i+=3){
           this.listf.push(result.data.slice(i,i+3))
         }
-        // console.log(this.listf)
+         console.log(this.listf,22)
       })
     },
   },
