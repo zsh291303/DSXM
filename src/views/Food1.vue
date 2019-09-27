@@ -1,13 +1,14 @@
 <template>
     <div class="container ">
+      <my-header></my-header>
         <div>
             <a class="text-dark a_style1" href=""><img class="img_style1 mr-2" src="../../public/img/shizhong.png" alt="">酉时宜散步，是养肾的最佳时间，吃黑色食物、动物肝脏对养肾有好处。</a>
         </div>
         <ul class="nav nav-tabs mt-5 u1 w1 m1">
-            <li class="nav-item"><a data-toggle="tab" href="#tab1" class="nav-link text-dark font-weight-bold h-100">人群膳食</a></li>
-            <li class="nav-item "><a data-toggle="tab" href="#tab2" class="nav-link text-dark font-weight-bold h-100">疾病调理</a></li>
-            <li class="nav-item"><a data-toggle="tab" href="#tab3" class="nav-link text-dark font-weight-bold h-100">功能性调理</a></li>
-            <li class="nav-item"><a data-toggle="tab" href="#tab4" class="nav-link text-dark font-weight-bold h-100">脏腑调理</a></li>
+            <li class="nav-item"><a data-toggle="tab" href="#tab1" class="nav-link text-dark font-weight-bold h-100 m-0">人群膳食</a></li>
+            <li class="nav-item "><a data-toggle="tab" href="#tab2" class="nav-link text-dark font-weight-bold h-100 m-0">疾病调理</a></li>
+            <li class="nav-item"><a data-toggle="tab" href="#tab3" class="nav-link text-dark font-weight-bold h-100 m-0">功能性调理</a></li>
+            <li class="nav-item"><a data-toggle="tab" href="#tab4" class="nav-link text-dark font-weight-bold h-100 m-0">脏腑调理</a></li>
         </ul>
         <div class="tab-content d-flex w1 m1">
             <div id="tab1" class="tab-pane active bg1">
@@ -110,54 +111,59 @@
             </div>-->      
         <div class="mt-5 margin1">
             <ul class="pagination">
-                <li class="page-item disabled">
-                    <a class="page-link " href="">上一页</a>
+                <li class="page-item" :class="pno<=1?'disabled':''">
+                  <a class="page-link " href="javascript:;" @click="change(-1)">上一页</a>
                 </li>
-                <li class="page-item active mr-1">
-                    <a class="page-link" href="">1</a>
+                <li class="page-item mr-1" v-for="i of pnum" :key="i" :class="i==pno?'active':''">
+                    <a class="page-link" href="javascript:;" @click="jump(i)">{{i}}</a>
                 </li>
-                <li class="page-item mr-1">
-                    <a class="page-link" href="">2</a>
+                <li class="page-item" :class="pno>=pnum?'disabled':''">
+                    <a class="page-link" href="javascript:;" @click="change(1)">下一页</a>
                 </li>
-                <li class="page-item mr-1">
-                    <a class="page-link" href="">3</a>
-                </li>
-                <li class="page-item mr-1">
-                    <a class="page-link" href="">4</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="">5</a>
-                </li>
-                <span class="s2">...</span>
-                <li class="page-item">
-                    <a class="page-link" href="">下一页</a>
-                </li>
-                <span class="s1">共15页</span>
+                <span class="s1">共{{pnum}}页</span>
             </ul>
-        </div>       
+        </div> 
+      <my-footer></my-footer>      
     </div>
 </template>
 <script>
 export default {
     data(){
         return{
-            pno:0,
+            pno:1,
+            pnum:0,
             list:[],
             innerWidth:990,
         }
     },
     methods: {
+      jump(i){
+        this.pno = i
+        this.loadMore()
+      },
+      change(i){
+        this.pno += i
+        this.loadMore()
+      },
         loadMore(){
             var url="/food/detail1";
-            this.pno++;
             var obj={pno:this.pno}
+            this.list = []
+            // console.log(this.pno)
             this.axios.get(url,{params:obj}).then(res=>{
-               console.log(res.data.data)
+              // console.log(res.data.data)
                var rows=res.data.data;
                for(var i=0;i<rows.length;i+=4){
                    this.list.push(rows.slice(i,i+4))
                }
-               console.log(this.list)
+              // console.log(this.list)
+            })
+            this.axios.get(
+              "/food/detail11"
+            )
+            .then(result=>{
+              // console.log(result.data.pnum)
+              this.pnum=result.data.pnum
             })
             /*this.axios.get(
                 "detail1"

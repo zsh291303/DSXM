@@ -6,7 +6,7 @@
   </h3>
 
 <div class="n1_loginitem">
-    <input type="text" class="text" v-model="uname" name="uname" placeholder="请输入用户名">
+    <input type="text" class="text" v-model="uphone" name="uname" placeholder="请输入用户名">
     <input type="password" class="password" v-model="upwd" name="upwd" placeholder="请输入密码">
     <label class="label_1">
         <input type="checkbox" id="auto_login_next" value="auto" class="checkbox">
@@ -16,7 +16,7 @@
       <div>
       <input type="button" class="submit_1" id="send" @click="login" value="登录">
     </div>
-    <a href="" class="golink" id="n1_gozc">还没有账号 免费注册</a>
+    <router-link class="golink" id="n1_gozc" :to="`/Res`">还没有账号 免费注册</router-link>
 </div>
 
     </div>
@@ -25,30 +25,31 @@
 export default {
    data(){
      return {
-      uname:"", 
+      uphone:"", 
       upwd:""  
     }
     },
    methods:{
      login(){
   
-       var u = this.uname;
+       var u = this.uphone;
        var p = this.upwd;
        //2: 创建正则表达式  3~12位置 字母数字
-       var reg = /^[a-z0-9\\u4e00-\\u9fa5]{2,12}$/i;
+       var reg1 = /1[3-9]\d{9}/i;
+       var reg2 = /[0-9a-zA-Z]{6,12}/i
        //3: 判断如何错误 用户名提示
-       if(!reg.test(u)){
+       if(!reg1.test(u)){
           alert("用户名格式不正确");
           return;
        }
        //4: 判断如何错误 密码提示
-       if(!reg.test(p)){
+       if(!reg2.test(p)){
          alert("密码格式不正确");
          return;
        }
        //5: 发送ajax axios
        var url = "/user/login";
-       var obj = {uname:u,upwd:p};
+       var obj = {uphone:u,upwd:p};
        this.axios.get(url,{params:obj}).then(res=>{
        //6: 回调函数:接收服务器返回数据
        console.log(res.data)

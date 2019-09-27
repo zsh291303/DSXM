@@ -1,13 +1,14 @@
 <template>
     <div class="container ">
+      <my-header></my-header>
         <div>
             <a class="text-dark a_style1" href=""><img class="img_style1 mr-2" src="../../public/img/shizhong.png" alt="">未时小肠养生期间，宜心平气和的静下来，适合下棋等安静的活动</a>
         </div>
         <ul class="nav nav-tabs mt-5 u1 w1 m1">
-            <li class="nav-item"><a data-toggle="tab" href="#tab1" class="nav-link text-dark font-weight-bold h-100">人群膳食</a></li>
-            <li class="nav-item "><a data-toggle="tab" href="#tab2" class="nav-link text-dark font-weight-bold h-100">疾病调理</a></li>
-            <li class="nav-item"><a data-toggle="tab" href="#tab3" class="nav-link text-dark font-weight-bold h-100">功能性调理</a></li>
-            <li class="nav-item"><a data-toggle="tab" href="#tab4" class="nav-link text-dark font-weight-bold h-100">脏腑调理</a></li>
+            <li class="nav-item"><a data-toggle="tab" href="#tab1" class="nav-link text-dark font-weight-bold h-100 m-0">人群膳食</a></li>
+            <li class="nav-item "><a data-toggle="tab" href="#tab2" class="nav-link text-dark font-weight-bold h-100 m-0">疾病调理</a></li>
+            <li class="nav-item"><a data-toggle="tab" href="#tab3" class="nav-link text-dark font-weight-bold h-100 m-0">功能性调理</a></li>
+            <li class="nav-item"><a data-toggle="tab" href="#tab4" class="nav-link text-dark font-weight-bold h-100 m-0">脏腑调理</a></li>
         </ul>
         <div class="tab-content d-flex w1 m1">
             <div id="tab1" class="tab-pane active bg1">
@@ -167,6 +168,7 @@
                 <span class="s1">共5页</span>
             </ul>
         </div>
+      <my-footer></my-footer>
     </div>
 </template>
 <script>

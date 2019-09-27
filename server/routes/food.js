@@ -3,26 +3,31 @@ const pool=require('../pool.js');
 var router=express.Router();
 router.get('/detail1',(req,res)=>{
     var pno=req.query.pno;
-    var ps=req.query.pageSize;
+    var ps = 16
     if(!pno){
         pno=1
     }
-    if(!ps){
-        ps=16
-    }
-    var sql="SELECT * from Pfood LIMIT ?,?";
+    var sql1="SELECT * from Pfood LIMIT ?,?";
     var offset=(pno-1)*ps;
     ps=parseInt(ps);
-    pool.query(sql,[offset,ps],(err,result)=>{
+    pool.query(sql1,[offset,ps],(err,result)=>{
         if(err)throw err;
         res.send({code:1,msg:"查询成功",data:result});
     })
-
     /*var sql="select * from Pfood"
     pool.query(sql,[],(err,result)=>{
         if(err) throw err;
         res.send({code:1,msg:"查询成功",data:result})
     })*/
+})
+router.get('/detail11',(req,res)=>{
+    var ps = 16
+    var sql = "select * from Pfood"
+    pool.query(sql,[],(err,result)=>{
+      if(err) throw err
+      var pnum = result.length/ps
+      res.send({pnum:pnum})
+    })
 })
 router.get('/kind1',(req,res)=>{
     var sql="select * from Population_dite"

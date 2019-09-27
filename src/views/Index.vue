@@ -7,7 +7,7 @@
     <middle></middle>
     <!-- 大轮播 -->
     <bgcarouerl></bgcarouerl>
-    <my-footer></my-footer>
+    <my-footer class="mt-5 ml-4"></my-footer>
   </div>
 </template>
 <script>

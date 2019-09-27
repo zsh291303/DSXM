@@ -4,6 +4,7 @@ import Index from './views/Index'
 import Login from './views/Login'
 import Food1 from './views/Food1'
 import Food2 from './views/Food2'
+import Res from './views/Res'
 
 Vue.use(Router)
 
@@ -14,5 +15,6 @@ export default new Router({
     {path: '/Login',component: Login},
     {path: '/Food2',component: Food2},
     {path: '/Food1',component: Food1},
+    {path: '/Res',component: Res},
   ]
 })

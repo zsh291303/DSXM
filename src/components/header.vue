@@ -14,15 +14,15 @@
 
  <a id="a1" href=""><img id="img1_qq" src="img/header/qq.png">QQ 登陆</a>
 <a  id="a2" href=""><img id ="img2_weibo"   src="img/header/weibo.png">微博登陆</a>
-<router-link :to="`/login/`">登陆</router-link>
-<router-link :to="`/reg/`">注册</router-link>
+<router-link :to="`/login`">登陆</router-link>
+<router-link :to="`/res`">注册</router-link>
 <!--<a href="">登陆</a>
 <a href="">注册</a>-->
 </div>
     </div>
 <div class="nav"> 
         <ul>
-                <li style="display:inline"><a href="">首页</a></li>
+                <li style="display:inline"><router-link :to="`/Index`">首页</router-link></li>
                 <li > <a  href="">菜谱大全</a>
                   <ul>
                    <li><a href="">家常菜谱</a></li>
@@ -65,7 +65,7 @@
       width: 300px;
       height: 30px;
       border-radius: 5px;
-     margin: 55px 1180px;
+     margin: 55px 700px;
     
   }
   .search #s2{
@@ -73,7 +73,7 @@
       width: 65px;
       height: 30px;
       border-radius: 5px;
-      margin:-83px 550px;
+      margin:-85px 430px;
       background-color:#aaa;
   }
   .dl_img{

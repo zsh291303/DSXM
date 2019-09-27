@@ -137,7 +137,7 @@ INSERT INTO ms_small_carousel_item VALUES
 #用户登录
 create table user_login(
   uid INT PRIMARY KEY AUTO_INCREMENT,
-  uname varchar(10),
+  uphone varchar(11),
   upwd varchar(12)
 );
 #插入数据
@@ -145,7 +145,6 @@ insert into user_login values
 ('NULL','jingjing','123456'),
 ('NULL','liangliang','123226'),
 ('NULL','haha','113216');
-
 
 #饮食健康
 #人群膳食表
