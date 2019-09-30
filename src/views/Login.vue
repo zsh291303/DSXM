@@ -16,7 +16,7 @@
       <div>
       <input type="button" class="submit_1" id="send" @click="login" value="登录">
     </div>
-    <router-link class="golink" id="n1_gozc" :to="`/Res`">还没有账号 免费注册</router-link>
+    <router-link class="golink" id="n1_gozc" :to="`/Resp`">还没有账号 免费注册</router-link>
 </div>
 
     </div>

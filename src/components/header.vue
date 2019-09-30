@@ -14,8 +14,13 @@
 
  <a id="a1" href=""><img id="img1_qq" src="img/header/qq.png">QQ 登陆</a>
 <a  id="a2" href=""><img id ="img2_weibo"   src="img/header/weibo.png">微博登陆</a>
-<router-link :to="`/login`">登陆</router-link>
-<router-link :to="`/res`">注册</router-link>
+<span>
+  <router-link :to="`/login`">登陆</router-link>
+  <router-link :to="`/resp`">注册</router-link>
+</span>
+<span>
+  <img src="" alt=""><span>用户：</span>
+</span>
 <!--<a href="">登陆</a>
 <a href="">注册</a>-->
 </div>

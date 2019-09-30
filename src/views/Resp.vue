@@ -1,38 +1,40 @@
 <template>
-
-<div class="reg">
-  <h3 class="n1_title">
-  注册美食杰
-  </h3>
-<a href="" class="reg_0">更多第三方登录方式</a>
-<div class="reg_bg">
-    <a class="reg_1" href="">手机注册</a>
-    <a class="reg_2" href="">|邮箱注册</a>
-
-<div class="n1_loginitem">
-    <input type="text" class="text forcheck pn_forcheck"
-    id="mobile" v-model="uphone" name="uname" placeholder="请输入手机号">
+<div id="regp">
+<div  class="reg">
+    <h3 class="n1_title">注册美食杰</h3>
+    <a href="" class="reg_0">更多第三方登录方式</a>
+    <div class="reg_bg">
+        <router-link class="reg_1" :to="`/resp`">手机注册</router-link>
+        <router-link class="reg_2" :to="`/rese`">| 邮箱注册</router-link>
+        <div class="n1_loginitem">
+            <input type="text" class="text forcheck pn_forcheck"
+            id="mobile" v-model="uphone" name="uname" @focus="show1" placeholder="请输入手机号"><br>
+            <span v-show="spanShow1">{{phoneAlert}}</span>
+        </div>
+        <div class="n1_loginitem">
+            <table></table>
+            <input type="text" class="text forcheck pyzm_forcheck" id="mobile_code" placeholder="请输入验证码">
+            <button class="phone_yzmbtn sended" id="phone_yzmbtn" @click="time" :disabled="dtime!=30">
+                <span v-if="dtime==30">免费获取验证码</span>
+                <span v-else>请{{dtime}}s后重试</span>
+            </button>
+        </div>
+        <div class="n1_loginitem">
+            <input type="password" class="password forcheck pw_forcheck" name="upwd" v-model="upwd" id="password_mobile" @focus="show2"
+            placeholder="请输入密码" ><br>
+            <span v-show="spanShow2">{{pwdAlert}}</span>
+        </div>
+        <div class="n1_loginitem" >
+            <label>
+                <input type="checkbox" id="mobile_check" v-model="choosed" class="checkbox">我已阅读并且同意
+                <a href="" >美食杰用户协议</a>
+            </label >
+        </div>
+        <div class="n1_loginitem" style="height:33px;">
+            <input type="button" class="submit" :disabled="!choosed" id="send" value="注册" @click="reg">
+        </div>
+        <router-link class="golink" id="n1_gozc" :to="`/Login`">已有账号马上登录</router-link>
     </div>
-    <div class="n1_loginitem">
-      <table></table>
-    <input type="text" class="text forcheck pyzm_forcheck" id="mobile_code" placeholder="请输入验证码">
-    <a class="phone_yzmbtn sended" id="phone_yzmbtn" href="">免费获取验证码</a>
-    </div>
-    <div class="n1_loginitem">
-    <input type="password" class="password forcheck pw_forcheck" name="upwd" v-model="upwd" id="password_mobile"
-    placeholder="请输入密码" >
-</div>
-<div class="n1_loginitem" >
-    <label>
-        <input type="checkbox" id="mobile_check" v-model="choosed" class="checkbox">我已阅读并且同意
-<a href="" >美食杰用户协议</a>
-       
-      </label >
-    </div>
-      <div class="n1_loginitem" style="height:33px;">
-      <input type="button" class="submit" :disabled="!choosed" id="send" value="注册" @click="reg">
-    </div>
-    <router-link class="golink" id="n1_gozc" :to="`/Login`">已有账号马上登录</router-link>
 </div>
 </div>
 
@@ -43,26 +45,40 @@
 export default {
   data(){
     return{
+      dtime:30,
+      spanShow1:false,
+      spanShow2:false,
+      phoneAlert:'',
+      pwdAlert:'',
       choosed:false,
       uphone:"",
       upwd:""
     }
   },
   methods:{
+    time(){
+      var timer = setInterval(()=>{
+        this.dtime--
+        if(this.dtime<=0){
+            this.dtime = 30
+            clearInterval(timer)
+        }
+      },1000)
+    },
+    show1(){
+        this.spanShow1 = true
+    },
+    show2(){
+        this.spanShow2 = true
+    },
     reg(){
       this.res()
     },
     res(){
-      var reg1 = /1[3-9]\d{9}/i;
-      var reg2 = /[0-9a-zA-Z]{6,12}/i
-      if(!reg1.test(this.uphone)){
-        alert("手机号格式错误")
-        return
-      }
-      if(!reg2.test(this.upwd)){
-        alert("密码格式错误")
-        return
-      }
+        if(this.uphone=="" || this.upwd == ""){
+           alert('手机号码或密码不能为空')
+           return
+        }
       this.axios.get(
         "/user/res",
         {
@@ -85,12 +101,42 @@ export default {
         }
      }) 
     }
+  },
+  watch:{
+    uphone(){
+        console.log(this.uphone)
+     
+      if(this.uphone ==  ""){
+          this.spanShow1 = false
+          return
+      }
+       var reg1 = /1[3-9]\d{9}/i;
+      if(!reg1.test(this.uphone)){
+        this.phoneAlert = "手机号格式错误"
+      }else{
+        this.phoneAlert = '手机号格式正确'
+        return
+      }
+    },
+    upwd(){
+        console.log(this.upwd)
+        if(this.upwd === ""){
+            this.spanShow2 = false
+            return
+        }
+    var reg2 = /[0-9a-zA-Z]{6,12}/i
+    if(!reg2.test(this.upwd)){
+        this.pwdAlert = "密码格式错误"
+      }else{
+        this.pwdAlert = "密码格式正确"
+      }
+    }
   }
 }
 </script>
 
 <style>
-    .reg{
+    #regp .reg{
         width:1000px;
         height: 800px;
         background-color:#fff;
@@ -98,15 +144,15 @@ export default {
        padding: 1px 0px 60px;
 
     }
-    .reg_0{
+    #regp .reg_0{
         color: #666;
        margin-left: 450px;
        }
-    .reg_0:hover{
+    #regp .reg_0:hover{
         color:#ec5541;
        text-decoration:underline;
     }
-   .reg_bg{
+   #regp .reg_bg{
        width: 600px;
        height:500px ;
        background-color:cornsilk;
@@ -114,23 +160,23 @@ export default {
      margin-left: 220px;
      margin-top: 30px;
    }
-   .reg_1{
+   #regp .reg_1{
        font-size: 20px;
        color:#000;
        margin-left: 62px;
        text-decoration: none;
    }
-   .reg_2{
+   #regp .reg_2{
        font-size: 20px;
        color:#aaa;
        margin-left: 10px;
        text-decoration: none;
    }
-   .reg_2:hover{
+   #regp .reg_2:hover{
        color:#ec5541;
        text-decoration: underline;
    }
-    .n1_title{
+    #regp .n1_title{
         height: 43px;
         line-height: 42px;
         font-size: 22px;
@@ -138,17 +184,17 @@ export default {
         text-align: center;
         margin: 40px auto;
     }
-    .n1_loginitem{
+    #regp .n1_loginitem{
         height: 100px;
         width: 230px;
         margin-bottom: 13px;
         margin-left: 370px;
     }
-    .reg_bg .n1_loginitem  #mobile {
+    #regp .reg_bg .n1_loginitem  #mobile {
         margin-left: -330px;
         margin-top: 30px;
         }
-    .reg_bg .n1_loginitem .text {
+    #regp .reg_bg .n1_loginitem .text {
         height: 30px;
         border:1px solid #ddd;
         border-radius: 4px;
@@ -162,7 +208,7 @@ export default {
       width: 290px;
       font-family: "Hiragino Sans CB","Microsoft Yahei"
     }
-    .reg_bg .n1_loginitem .password{
+    #regp .reg_bg .n1_loginitem .password{
         height: 30px;
         border:1px solid #ddd;
         border-radius: 4px;
@@ -176,7 +222,7 @@ export default {
       width: 290px;
       font-family: "Hiragino Sans CB","Microsoft Yahei"
     }
- .phone_yzmbtn{
+ #regp .phone_yzmbtn{
      width: 130px;
      float:right;
      background: #8fc31f;
@@ -190,16 +236,16 @@ export default {
     text-align: center;
     margin-top: 10px
  }
- .phone_yzmbtn:hover{
+ #regp .phone_yzmbtn:hover{
      background:#ddd;
  }
- .phone_yzmbtn .sended{
+ #regp .phone_yzmbtn .sended{
      background: #ddd;
      border: 1px solid #ccc;
      color:#999
  }
  
-    .n1_loginitem .submit{
+    #regp .n1_loginitem .submit{
         display: inline-block;
         vertical-align: top;
         *display: inline;
@@ -217,10 +263,10 @@ export default {
         cursor: pointer;
         margin-top: -50px;
     }
-    .n1_loginitem .submit:hover{
+    #regp .n1_loginitem .submit:hover{
         background: #db432e
         }
-    .n1_loginitem label{
+    #regp .n1_loginitem label{
         color:#666;
         font-size: 13px;
         line-height: 22px;
@@ -228,20 +274,20 @@ export default {
         margin-left: -200px;
         
     }
-    .n1_loginitem input{
+    #regp .n1_loginitem input{
         margin-top: 10px;
         position: relative;
     }
-    .n1_loginitem label a{
+    #regp .n1_loginitem label a{
         color: #666;
        margin-left: 10px;
     
     }
-    .n1_loginitem label a:hover{
+    #regp .n1_loginitem label a:hover{
         text-decoration: underline;
         color:#ec5541;
     }
-   .golink{
+   #regp .golink{
        color:#333;
        font-size: 15px;
        display: block;
@@ -251,7 +297,7 @@ export default {
        height: 66px;
 
    }
-   .golink:hover{
+   #regp .golink:hover{
        color:#ec5541;
        text-decoration: underline;
    }

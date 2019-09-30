@@ -9,7 +9,7 @@ var app = express();
 app.listen(5050)
 
 app.use(cors({
-  origin:["http://172.17.10.238:8081","http://localhost:8081"],
+  origin:["http://172.17.10.238:8082","http://localhost:8082"],
   credentials:true
 }))
 
