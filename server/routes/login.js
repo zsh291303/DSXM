@@ -6,13 +6,13 @@ var router=express.Router();
 router.get("/login",(req,res) => {
   var uphone = req.query.uphone
   var upwd = req.query.upwd
-  var sql = "select uid from user_login where uphone=? and upwd=?"
+  var sql = "select uid,uphone from user_login where uphone=? and upwd=?"
   pool.query(sql,[uphone,upwd],(err,result) => {
     if(err)  throw  err
     if(result.length!=0){
-      var id = result[0].uid
+      var id = result[0].uphone
       req.session.uid = id
-      res.send({code:1, msg:"登录成功"})
+      res.send({code:1, msg:"登录成功",data:result})
     }else{
       res.send({code:-1, msg:"用户名或密码不正确"})
     }

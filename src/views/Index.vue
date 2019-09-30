@@ -25,6 +25,7 @@ export default {
       lists:[],
       pc:"",
       listp:[],
+      uphone:""
     }
   },
   methods:{
@@ -61,6 +62,7 @@ export default {
    
     this.loadp();
     this.loads();
+    this.uphone = this.$route.query.uphone 
 
   },
   computed:{

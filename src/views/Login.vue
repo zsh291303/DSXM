@@ -52,14 +52,14 @@ export default {
        var obj = {uphone:u,upwd:p};
        this.axios.get(url,{params:obj}).then(res=>{
        //6: 回调函数:接收服务器返回数据
-       console.log(res.data)
+       console.log(res.data.data)
        var code = res.data.code;
        if(code==-1){
      //7: 失败 提示
         alert(res.data.msg);
        }else{
          //成功跳转
-       this.$router.push("/Index")
+       this.$router.push({path:"/Index",query:{uphone:this.uphone}})
        }    
      })
    }
