@@ -60,6 +60,7 @@ export default {
        }else{
          //成功跳转
        this.$router.push({path:"/Index",query:{uphone:this.uphone}})
+       localStorage.setItem("uphone",this.uphone);
        }    
      })
    }

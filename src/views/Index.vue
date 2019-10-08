@@ -63,6 +63,8 @@ export default {
     this.loadp();
     this.loads();
     this.uphone = this.$route.query.uphone 
+    var uphone = localStorage.getItem('uphone')
+    console.log(uphone)
 
   },
   computed:{
